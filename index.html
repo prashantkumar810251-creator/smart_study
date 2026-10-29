@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#5b4bdb" />
+    <meta name="description" content="SmartStudy: a focused workspace for finding, saving, and planning study resources." />
+    <title>SmartStudy — Learn with a plan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <div class="sidebar__top">
+          <a class="brand" href="#dashboard" aria-label="SmartStudy dashboard">
+            <span class="brand__mark" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span>smartstudy</span>
+          </a>
+          <button class="mobile-close icon-button" id="closeMenu" aria-label="Close navigation">×</button>
+        </div>
+
+        <p class="nav-label">Workspace</p>
+        <nav class="navigation">
+          <button class="nav-link is-active" type="button" data-view="dashboard" aria-current="page">
+            <span class="nav-icon">⌂</span><span>Overview</span>
+          </button>
+          <button class="nav-link" type="button" data-view="library">
+            <span class="nav-icon">▧</span><span>Resource library</span>
+          </button>
+          <button class="nav-link" type="button" data-view="saved">
+            <span class="nav-icon">♡</span><span>Saved for later</span><b class="nav-badge" id="savedNavCount">0</b>
+          </button>
+          <button class="nav-link" type="button" data-view="planner">
+            <span class="nav-icon">◴</span><span>Study planner</span>
+          </button>
+        </nav>
+
+        <p class="nav-label nav-label--spaced">Current courses</p>
+        <div class="course-list">
+          <button class="course-item is-selected" type="button" data-course="Python Programming">
+            <span class="course-dot course-dot--violet">Py</span><span><b>Python Programming</b><small>Semester 01</small></span>
+          </button>
+          <button class="course-item" type="button" data-course="Engineering Maths">
+            <span class="course-dot course-dot--orange">∫</span><span><b>Engineering Maths</b><small>Semester 01</small></span>
+          </button>
+          <button class="course-item" type="button" data-course="Web Development">
+            <span class="course-dot course-dot--blue">&lt;/&gt;</span><span><b>Web Development</b><small>Semester 02</small></span>
+          </button>
+        </div>
+
+        <div class="profile-card">
+          <span class="profile-avatar">PS</span>
+          <span><b>Prashant Singh</b><small>Student workspace</small></span>
+          <button class="more-button" type="button" aria-label="Account options">•••</button>
+        </div>
+      </aside>
+
+      <div class="sidebar-scrim" id="sidebarScrim"></div>
+      <main class="main-content">
+        <header class="topbar">
+          <button class="menu-button icon-button" id="openMenu" aria-label="Open navigation"><span></span><span></span><span></span></button>
+          <div class="crumbs" aria-label="Breadcrumb"><span>Workspace</span><i>/</i><b id="crumbLabel">Overview</b></div>
+          <div class="topbar__actions">
+            <span class="sync-status"><i></i> All changes saved</span>
+            <button class="bell-button icon-button" type="button" aria-label="Notifications"><span aria-hidden="true">♧</span><em></em></button>
+            <button class="top-avatar" type="button" aria-label="Open profile">PS</button>
+          </div>
+        </header>
+
+        <section class="page-section view-section is-visible" id="dashboardView" data-section="dashboard">
+          <div class="hero">
+            <div class="hero__copy">
+              <p class="eyebrow"><span>✦</span> YOUR PERSONAL STUDY SPACE</p>
+              <h1>Make every study<br /><em>session count.</em></h1>
+              <p class="hero__description">Find quality resources, build a plan that fits your week, and keep your learning moving forward.</p>
+              <div class="hero__actions">
+                <button class="button button--primary" type="button" data-go-library>Explore resources <span>→</span></button>
+                <button class="text-button" type="button" data-view="planner">Open my plan <span>↗</span></button>
+              </div>
+            </div>
+            <div class="hero__visual" aria-hidden="true">
+              <span class="hero-ring hero-ring--one"></span><span class="hero-ring hero-ring--two"></span>
+              <span class="hero-star hero-star--one">✦</span><span class="hero-star hero-star--two">✧</span><span class="hero-star hero-star--three">✦</span>
+              <div class="hero-card hero-card--back"></div>
+              <div class="hero-card hero-card--front"><span>⌘</span><b>Keep<br />learning</b><i>→</i></div>
+              <span class="hero-caption">A LITTLE PROGRESS<br />EACH DAY</span>
+            </div>
+          </div>
+
+          <section class="metrics" aria-label="Learning statistics">
+            <article class="metric-card"><span class="metric-icon metric-icon--purple">▧</span><p>Resources explored</p><strong id="exploredCount">0</strong><small><i>↑</i> Keep discovering</small></article>
+            <article class="metric-card"><span class="metric-icon metric-icon--mint">♢</span><p>Learning streak</p><strong>04 <small>days</small></strong><small><i>↑</i> Your best is 7 days</small></article>
+            <article class="metric-card"><span class="metric-icon metric-icon--peach">✓</span><p>Plan progress</p><strong id="planProgress">0<small>%</small></strong><small><i>↑</i> <span id="planProgressLabel">Set your first goal</span></small></article>
+            <article class="metric-card metric-card--focus"><span class="metric-icon metric-icon--blue">◷</span><p>Up next</p><strong id="nextLesson">Python Basics</strong><small>Est. 18 min</small></article>
+          </section>
+
+          <section class="focus-panel">
+            <div class="section-title section-title--inline"><div><p class="section-kicker">TODAY'S FOCUS</p><h2>What would you like to work on?</h2></div><span class="date-chip" id="todayDate"></span></div>
+            <div class="focus-options" id="focusOptions" role="group" aria-label="Learning goals">
+              <button class="focus-option is-selected" type="button" data-focus="Concepts"><span class="focus-symbol">◇</span><b>Understand concepts</b><small>Build the foundations</small><i>→</i></button>
+              <button class="focus-option" type="button" data-focus="Practice"><span class="focus-symbol">⌘</span><b>Practice &amp; apply</b><small>Learn by doing</small><i>→</i></button>
+              <button class="focus-option" type="button" data-focus="Exam prep"><span class="focus-symbol">✦</span><b>Prepare for exams</b><small>Revise with confidence</small><i>→</i></button>
+              <button class="focus-option" type="button" data-focus="Projects"><span class="focus-symbol">↗</span><b>Build a project</b><small>Make something real</small><i>→</i></button>
+            </div>
+          </section>
+
+          <section class="resource-section">
+            <div class="section-title"><div><p class="section-kicker">CURATED FOR YOU</p><h2>Continue your momentum <span class="result-badge" id="dashboardResourceCount"></span></h2><p>Based on your focus, course, and saved interests.</p></div><button class="link-button" type="button" data-go-library>View all resources <span>→</span></button></div>
+            <div class="resource-grid" id="dashboardGrid"></div>
+          </section>
+        </section>
+
+        <section class="page-section view-section" id="libraryView" data-section="library">
+          <div class="page-heading"><p class="eyebrow"><span>✦</span> RESOURCE LIBRARY</p><h1>Find your next<br /><em>great study session.</em></h1><p>Search a growing collection of trusted lessons, notes, practice sets, and project guides.</p></div>
+          <section class="discover-panel" aria-label="Search and filter resources">
+            <div class="search-row"><label class="search-box"><span>⌕</span><input type="search" id="searchInput" autocomplete="off" placeholder="Search topics, concepts, or skills…" aria-label="Search resources" /><kbd>⌘ K</kbd></label><button class="button button--primary" id="clearFilters" type="button">Reset filters</button></div>
+            <div class="filter-row">
+              <label>Subject<select id="subjectFilter"><option value="All">All subjects</option><option value="Python Programming">Python Programming</option><option value="Engineering Maths">Engineering Maths</option><option value="Web Development">Web Development</option><option value="Physics">Physics</option></select></label>
+              <label>Format<select id="typeFilter"><option value="All">All formats</option><option value="Video">Video lessons</option><option value="Notes">Notes &amp; guides</option><option value="Practice">Practice</option><option value="Guide">Guides</option></select></label>
+              <label>Level<select id="levelFilter"><option value="All">All levels</option><option value="Beginner">Beginner</option><option value="Intermediate">Intermediate</option><option value="Advanced">Advanced</option></select></label>
+              <div class="filter-label"><span>Show me</span><div class="topic-pills" id="topicPills"><button class="topic-pill is-selected" type="button" data-focus="Concepts">Concepts</button><button class="topic-pill" type="button" data-focus="Practice">Practice</button><button class="topic-pill" type="button" data-focus="Exam prep">Exam prep</button><button class="topic-pill" type="button" data-focus="Projects">Projects</button></div></div>
+            </div>
+          </section>
+          <section class="resource-section resource-section--library">
+            <div class="section-title section-title--results"><div><h2 id="libraryTitle">Recommended resources <span class="result-badge" id="libraryResourceCount"></span></h2><p id="libraryDescription">Sorted around your current focus.</p></div><label class="sort-label">Sort by<select id="sortFilter"><option value="recommended">Best match</option><option value="rating">Highest rated</option><option value="title">Title A–Z</option></select></label></div>
+            <div class="resource-grid" id="libraryGrid"></div>
+            <div class="empty-state" id="emptyState" hidden><span>⌕</span><h2>No resources found</h2><p>Try a different topic, course, or filter.</p><button class="button button--primary" type="button" id="clearEmpty">Clear filters</button></div>
+          </section>
+        </section>
+
+        <section class="page-section view-section" id="savedView" data-section="saved">
+          <div class="page-heading page-heading--compact"><p class="eyebrow"><span>♡</span> YOUR LIBRARY</p><h1>Saved for<br /><em>when it matters.</em></h1><p>Your hand-picked resources are right here, ready for the next focused session.</p></div>
+          <section class="resource-section resource-section--saved"><div class="section-title section-title--results"><div><h2>My saved resources <span class="result-badge" id="savedResourceCount"></span></h2><p>Keep the material you want to revisit close at hand.</p></div><button class="link-button" type="button" data-go-library>Discover more <span>→</span></button></div><div class="resource-grid" id="savedGrid"></div><div class="empty-state" id="savedEmpty" hidden><span>♡</span><h2>Your saved list is waiting</h2><p>When you find something useful, save it here for later.</p><button class="button button--primary" type="button" data-go-library>Explore resources</button></div></section>
+        </section>
+
+        <section class="page-section view-section" id="plannerView" data-section="planner">
+          <div class="planner-header"><div class="page-heading page-heading--compact"><p class="eyebrow"><span>◴</span> STUDY PLANNER</p><h1>A plan you will<br /><em>actually follow.</em></h1><p>Work through a simple sequence—one meaningful step at a time.</p></div><div class="planner-course-picker"><label for="plannerSubject">Learning plan for</label><select id="plannerSubject"><option value="Python Programming">Python Programming</option><option value="Engineering Maths">Engineering Maths</option><option value="Web Development">Web Development</option></select></div></div>
+          <div class="planner-layout"><section class="plan-card"><div class="plan-card__header"><div><p class="section-kicker">THIS WEEK</p><h2 id="planTitle">Python foundations</h2></div><span class="plan-completion" id="planCompletion">0% complete</span></div><div class="progress-track" aria-hidden="true"><i id="plannerProgressBar"></i></div><div class="plan-steps" id="planSteps"></div></section><aside class="habit-card"><div class="habit-icon">✦</div><p class="section-kicker">STUDY RHYTHM</p><h2>Small steps,<br />real progress.</h2><p>Schedule three focused blocks this week. Start with the first unfinished task.</p><div class="week-dots" aria-label="This week's study days"><span class="is-done">M</span><span class="is-done">T</span><span class="is-done">W</span><span class="is-today">T</span><span>F</span><span>S</span><span>S</span></div><button class="button button--light" type="button" data-go-library>Find a resource <span>→</span></button></aside></div>
+        </section>
+
+        <footer class="footer"><span>SMARTSTUDY</span><i>•</i><p>Built for purposeful learning</p><p class="footer__right">Your progress is saved on this device</p></footer>
+      </main>
+    </div>
+
+    <div class="resource-modal" id="resourceModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-backdrop" data-close-modal></div>
+      <article class="modal-card"><button class="modal-close icon-button" type="button" data-close-modal aria-label="Close details">×</button><div id="modalContent"></div></article>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
